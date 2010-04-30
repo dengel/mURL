@@ -74,6 +74,6 @@
 		</div>
 	</div>
 	<?php #echo $this->element('sql_dump'); ?>
-	<?php #echo pr($this->params); ?>
+	<?php echo pr($this->params); ?>
 </body>
 </html>

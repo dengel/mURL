@@ -38,7 +38,7 @@ class MurlsController extends AppController {
       if (isset($this->params['url']['domains'])) {
       $all_murls  = $this->Murl->find('all', array('order' => array('Murl.id DESC')));
       foreach ($all_murls as $one_murl) {
-         $durl=urldecode(stripslashes($one_murl['Murl']['url']));
+         $durl=urldecode(stripslashes($one_murl['Murl']['uri']));
          $domain=parse_url($durl, PHP_URL_HOST);
          $bits=array_reverse(explode(".", $domain));
          error_reporting (0);
@@ -79,10 +79,10 @@ class MurlsController extends AppController {
             $result['Murl']['hits']++;
             unset($result['Murl']['modified']);
             $this->Murl->save($result);
-            $this->redirect(urldecode(stripslashes($result['Murl']['url'])));
+            $this->redirect(urldecode(stripslashes($result['Murl']['uri'])));
          }
       } else {
-         $this->Session->setFlash('Say what? Not sure what you mean.');
+         $this->Session->setFlash('What? Not sure what you mean.');
          $this->set('error', '404');
       }
    }
@@ -90,17 +90,23 @@ class MurlsController extends AppController {
    function create() {
       $this->set('code',0);
       $this->set('params','None');
-      if ($this->data['Murl']['url']) {
+      if (isset($this->params['url']['uri'])) {
+         $this->data['Murl']['uri'] = $this->params['url']['uri'];
+         $this->data['Murl']['protect'] = $this->params['url']['protect'];
+         $this->data['Murl']['private'] = $this->params['url']['private'];
+         $this->data['Murl']['destruct'] = $this->params['url']['destruct'];
+      }
+      if ($this->data['Murl']['uri']) {
          $this->data['Murl']['remote']=$this->RequestHandler->getClientIP();
          $this->data['Murl']['referer']=$this->RequestHandler->getReferer();
          $this->data['Murl']['agent']=$_SERVER['HTTP_USER_AGENT'];
          $this->Murl->set( $this->data );
          if ($this->Murl->validates()) {
-            $found=stristr($this->data['Murl']['url'],'http://murl.net/');
+            $found=stristr($this->data['Murl']['uri'],'http://murl.net/');
             if ($found) {
                   $this->redirect(array('action' => 'view?one='.substr($found, strlen('http://murl.net/'))));
             } 
-            $result=$this->Murl->find('first', array('conditions' => array('Murl.url =' => $this->data['Murl']['url'])));
+            $result=$this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));
             if ($result) {
                $this->Session->setFlash('Entry already exists.');
                $this->set('code',$result['Murl']['code']);
@@ -112,7 +118,7 @@ class MurlsController extends AppController {
                   $this->data['Murl']['code']=$code;
                   $this->Murl->save($this->data);
                   $crunch_msg="What's going on?";
-                  $delta=strlen($this->data['Murl']['url'])-(strlen($this->data['Murl']['code'])+strlen('http://murl.net/'));
+                  $delta=strlen($this->data['Murl']['uri'])-(strlen($this->data['Murl']['code'])+strlen('http://murl.net/'));
                   if ($delta < 0) {
                      $crunch_msg="We're ashamed... good for you.";
                   } elseif ($delta == 0) {

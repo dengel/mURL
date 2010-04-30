@@ -42,7 +42,7 @@
             </td>
 
             <td class="left">
-               <?php echo substr(urldecode($murl['Murl']['url']),0,120) ?>
+               <?php echo substr(urldecode($murl['Murl']['uri']),0,120) ?>
             </td>
             <td class="right">
                <?php echo $murl['Murl']['hits'] ?>

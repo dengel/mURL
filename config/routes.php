@@ -36,9 +36,6 @@
 	Router::connect('/Murls/view/*', array('controller' => 'murls', 'action' => 'view'));
 	Router::connect('/murls/view/*', array('controller' => 'murls', 'action' => 'view'));
 	Router::connect('/Murls/create/*', array('controller' => 'murls', 'action' => 'create'));
-	Router::connect('/Murls/create*', array('controller' => 'murls', 'action' => 'create'));
-	Router::connect('/Murls/create?', array('controller' => 'murls', 'action' => 'create'));
-	Router::connect('/Murls/create', array('controller' => 'murls', 'action' => 'create'));
 	Router::connect('/', array('controller' => 'murls', 'action' => 'create'));
 	Router::connect('/*', array('controller' => 'murls', 'action' => 'process'));
 ?>
