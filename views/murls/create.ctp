@@ -35,7 +35,7 @@ $submit = array("Go, damn it!",
                 "Does not hurt any :)", 
                 "Punch it, Chewy!", 
                 "Have you hugged a robot today?");
-echo $form->create('Murl', array('type' => 'get'));
+echo $form->create('Murl', array('type' => 'put'));
 echo $form->input('uri', array('label' => 'Insert URL below:'));
 echo "<div id='options_div' style='display:none;'>";
 echo $form->input('protect', array('div' => 'small'));      
