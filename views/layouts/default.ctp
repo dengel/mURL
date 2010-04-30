@@ -74,6 +74,7 @@
 		</div>
 	</div>
 	<?php #echo $this->element('sql_dump'); ?>
-	<?php echo pr($this->params); ?>
+	<?php #echo pr($this->params); ?>
+	<?php echo "<small>Version: 0.2</small>"; ?>
 </body>
 </html>
