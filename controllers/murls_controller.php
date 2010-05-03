@@ -116,24 +116,15 @@ class MurlsController extends AppController {
                   $id=$this->Murl->getInsertId();
                   $code = base_convert($id,10,36);
                   $this->data['Murl']['code']=$code;
+
                   $this->Murl->save($this->data);
-                  $crunch_msg="What's going on?";
-                  $delta=strlen($this->data['Murl']['uri'])-(strlen($this->data['Murl']['code'])+strlen('http://murl.net/'));
-                  if ($delta < 0) {
-                     $crunch_msg="We're ashamed... good for you.";
-                  } elseif ($delta == 0) {
-                     $crunch_msg="Wow, we kinnda broke even, uh?";
-                  } elseif ($delta == 1) {
-                     $crunch_msg="One is better than none.";
-                  } elseif ( ($delta > 1) && ($delta < 20) ) {
-                     $crunch_msg="You got shrunken!";
-                  } elseif ( ($delta >= 20) && ($delta < 50) ) {
-                     $crunch_msg="Now that's good shrinking.";
-                  } elseif ( ($delta >= 50) && ($delta < 150) ) {
-                     $crunch_msg="Massive shrinkage detected!";
-                  } elseif ($delta >= 150) {
-                     $crunch_msg="You are the King of mURL!";
-                  }
+
+                  //$delta=strlen($this->data['Murl']['uri'])-(strlen($this->data['Murl']['code'])+strlen('http://murl.net/'));
+
+                  $code = $this->Murl->getCode();
+                  $delta = $this->Murl->getDelta();
+                  $crunch_msg = $this->Murl->getCrunch($delta);
+
                   $this->Session->setFlash($crunch_msg.' Savings of '.$delta.' characters.');
                   #$this->redirect(array('action' => 'index'));
                   $this->set('params', 'Saved');
