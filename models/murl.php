@@ -10,6 +10,14 @@ class Murl extends AppModel {
             )
     );
 
+    function genCode($id) {
+        $code = base_convert($id,10,36);
+        $this->id = $id;
+        $this->saveField('code',$code);
+        return $code;
+        
+    }
+
     function getCrunch($delta) {
         $crunch_msg="What's going on?";
         if ($delta < 0) {
@@ -30,12 +38,10 @@ class Murl extends AppModel {
         return $crunch_msg;
     }
 
-    function getCode() {
-        return $this->code;
-    }
+    function getDelta($id) {
+        $result = $this->find('first',array('conditions'=>array('Murl.id'=>$id)));
 
-    function getDelta() {
-        return strlen($this->data['Murl']['uri'])-(strlen($this->data['Murl']['code'])+strlen('http://murl.net/'));
+        return strlen($result['Murl']['uri'])-(strlen($result['Murl']['code'])+strlen('http://murl.net/'));
     }
 }
 ?>

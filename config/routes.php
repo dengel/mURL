@@ -25,17 +25,21 @@
  * Here, we are connecting '/' (base path) to controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+ Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
  */
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-   /* Murl stuff */
-	Router::connect('/Murls/view/*', array('controller' => 'murls', 'action' => 'view'));
-	Router::connect('/murls/view/*', array('controller' => 'murls', 'action' => 'view'));
-	Router::connect('/Murls/create/*', array('controller' => 'murls', 'action' => 'create'));
-	Router::connect('/', array('controller' => 'murls', 'action' => 'create'));
-	Router::connect('/*', array('controller' => 'murls', 'action' => 'process'));
+/* Murl stuff */
+Router::connect('/view/*', array('controller' => 'murls', 'action' => 'view'));
+Router::connect('/top/*', array('controller' => 'murls', 'action' => 'top'));
+Router::connect('/random/*', array('controller' => 'murls', 'action' => 'random'));
+Router::connect('/search/*', array('controller' => 'murls', 'action' => 'search'));
+Router::connect('/reverse/:code', array('controller' => 'murls', 'action' => 'reverse'),array('code'=>'[0-9a-zA-Z]+'));
+
+Router::connect('/create', array('controller' => 'murls', 'action' => 'add'));
+Router::connect('/', array('controller' => 'murls', 'action' => 'add'));
+Router::connect('/*', array('controller' => 'murls', 'action' => 'process'));
 ?>
