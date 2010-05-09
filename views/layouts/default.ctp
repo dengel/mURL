@@ -43,12 +43,15 @@
                     <li><?= $this->Html->link("Top","/top"); ?></li>
                     <li><?= $this->Html->link("Search","/search"); ?></li>
                 </ul>
-                
-                <div class="adsnse">
+
+                <div class="tocenter">
                     <?php
                     if(Configure::read('debug') == 0) {
                         echo $this->element("adsense");
+                    } else {
+                        echo "AdSense Place Holder";
                     }
+
                     ?>
                 </div>
 
@@ -62,7 +65,12 @@
                 ?>
             </div>
         </div>
-        <?php echo "<small>Version: 0.3 Development</small>"; ?>
-        <?php echo $this->element('sql_dump'); ?>
-    </body>
-</html>
+        <?php echo "<small>Version: 0.4 Development</small>"; ?>
+        <?php
+        if(Configure::read('debug')) {
+            echo $this->element('sql_dump');
+            pr($this->params);
+        }
+        ?>
+        </body>
+        </html>

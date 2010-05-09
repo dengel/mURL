@@ -1,4 +1,3 @@
-<?php if (0): ?>
 <script type="text/javascript"><!--
     google_ad_client = "pub-8660589795501578";
     /* 728x15, created 4/17/10 */
@@ -10,6 +9,3 @@
 <script type="text/javascript"
         src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
-<?php else: ?>
-AdSense
-<?php endif; ?>

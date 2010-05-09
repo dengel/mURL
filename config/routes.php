@@ -29,8 +29,9 @@
  */
 /**
  * ...and connect the rest of 'Pages' controller's urls.
+ * NOT NEEDED FOR MURL
  */
-Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+/* Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display')); */
 
 /* Murl stuff */
 Router::connect('/view/*', array('controller' => 'murls', 'action' => 'view'));
