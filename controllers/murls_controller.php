@@ -90,6 +90,7 @@ class MurlsController extends AppController {
                 $found = stristr($this->data['Murl']['uri'],'http://murl.net/');
                 if ($found) {
                     $this->redirect("/reverse/".substr($found, strlen('http://murl.net/')));
+		    exit();
                 }
 
                 $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));
@@ -144,6 +145,7 @@ class MurlsController extends AppController {
             } else {
                 $this->Murl->updateAll(array('Murl.hits'=>'Murl.hits+1'), array('Murl.id'=>$result['Murl']['id']));
                 $this->redirect(urldecode(stripslashes($result['Murl']['uri'])));
+		exit();
             }
         } else {
             $this->Session->setFlash('What? Not sure what you mean.');
