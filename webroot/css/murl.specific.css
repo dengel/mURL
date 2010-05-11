@@ -44,3 +44,37 @@ a.beta:hover {
 	color: #F0FFF0;
 	text-decoration:none;
 }
+
+/* Table Style */
+table.mstyle {
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+table.mstyle th {
+    text-align: left;
+    font-weight: normal;
+    padding: 0.1em 0.5em;
+    border-bottom: 2px solid #FFFFFF;
+    background: #DBE2F1;
+}
+table.mstyle td {
+    text-align: left;
+    border-bottom: 2px solid #FFFFFF;
+    padding: 0.1em 0.5em;
+    background: #DBE2F1;
+}
+
+table.mstyle thead th {
+    background: #687EAB;
+    color: #FFFFFF;
+    text-align: center;
+}
+table.mstyle th.Corner {
+    text-align: left;
+}
+table.mstyle tr:nth-child(odd) {
+  background-color: #CACACA;
+}
+.nobreak {
+  white-space: nowrap;
+}
