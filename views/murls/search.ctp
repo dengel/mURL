@@ -53,9 +53,9 @@
         <tr>
             <td>
                         <?
-                        if ($murl['Murl']['private']) echo "Private ";
+                        if ($murl['Murl']['private'])  echo "Private ";
                         if ($murl['Murl']['destruct']) echo "Destruct ";
-                        if ($murl['Murl']['protect']) echo "Protect ";
+                        if ($murl['Murl']['protect'])  echo "Protect ";
                         ?>
             </td>
             <td colspan='5'>
@@ -66,4 +66,8 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<br />
+<i>Paginator?</i>
+<br />
+<br />
 <? endif; ?>

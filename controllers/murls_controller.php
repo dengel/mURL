@@ -1,57 +1,59 @@
 <?php
 class MurlsController extends AppController {
 
-    var $name = 'Murls';
-    var $helpers = array('Html','Ajax','Javascript');
+    var $name       = 'Murls';
+    var $helpers    = array('Html','Ajax','Javascript');
     var $components = array('RequestHandler');
 
-    var $paginate = array(
+    var $paginate   = array(
             'limit' => 10,
             'order' => array(
                             'Murl.id' => 'desc'
             )
     );
 
-    function random() {
-        $this->set('title_for_layout', "Random mURLs");
-        $this->Murl->recursive = 0;
-        $this->set('murls', $this->Murl->find('all', array(
-                'limit' => 1,
-                'order' => array('rand()'),
-        )));
-    }
-
-    function top() {
-        $this->set('title_for_layout', "Top mURLs");
-        $this->Murl->recursive = 0 ;
-        $this->set('murls', $this->Murl->find('all', array(
-                'limit' => 20,
-                'order' => array('Murl.hits DESC'),
-        )));
-    }
-
-    function view() {
-        $this->set('title_for_layout', "View mURLs");
-        $this->Murl->recursive = 0;
-        $this->set('murls',$this->paginate());
-    }
-
-    function search() {
-        $this->set('title_for_layout', "Search mURLs");
-    }
-
-    function search_result() {
-        $this->Murl->recursive = 0;
-
-        if($this->data) {
-            $this->set('murls', $this->Murl->find('all', array(
-                    'limit' => 20,
-                    'order' => array('Murl.id DESC'),
-                    'conditions' => array('Murl.uri LIKE' => '%'.$this->data['Murl']['field'].'%')
-            )));
+    function add() {
+        if ($this->data) {
+            $this->data['Murl']['remote'] = $this->RequestHandler->getClientIP();
+            $this->data['Murl']['referer'] = $this->RequestHandler->getReferer();
+            $this->data['Murl']['agent'] = $_SERVER['HTTP_USER_AGENT'];
+            
+            if ($this->Murl->validates($this->data)) {
+                
+                /* reverse murl */
+                $found = stristr($this->data['Murl']['uri'],'http://murl.net/');
+                if ($found) {
+                    $this->redirect("/reverse/".substr($found, strlen('http://murl.net/')));
+                    exit();
+                }
+                
+                $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));
+                if ($result) {
+                    $this->Session->setFlash('Entry already exists.');
+                    $this->set('code',$result['Murl']['code']);
+#                   $this->set('params',$result['Murl']['code']);
+                } else {
+                    $this->Murl->create();
+                    if ($this->Murl->save($this->data)) {
+                        $id = $this->Murl->getInsertId();
+                        $code = $this->Murl->genCode($id);
+                        $delta = $this->Murl->getDelta($id);
+                        $crunch_msg = $this->Murl->getCrunch($delta);
+                        $this->Session->setFlash($crunch_msg.' Savings of '.$delta.' characters.');
+                        
+#                       $this->set('params', 'Saved');
+                        $this->set('code',$code);
+                        unset($this->data["Murl"]);
+                    } else {
+#                       $this->set('params', "No save");
+                    }
+                }
+            } else {
+#               $this->set('params', "Bad");
+            }
         }
     }
-
+    
     function domain() {
         $all_murls  = $this->Murl->find('all', array('order' => array('Murl.id DESC')));
         foreach ($all_murls as $one_murl) {
@@ -69,69 +71,16 @@ class MurlsController extends AppController {
         $domain_hash=array_reverse($domain_hash);
         $this->set('domains', $domain_hash);
     }
-
-    function reverse() {
-        $this->set('title_for_layout', "Reverse mURL");
-
-        $result = $this->Murl->find("first",array('conditions'=>array('Murl.code'=>$this->params["code"],'Murl.destruct'=>0)));
-
-        $this->set('murl',$result);
-    }
-
-    function add() {
-        if ($this->data) {
-            $this->data['Murl']['remote'] = $this->RequestHandler->getClientIP();
-            $this->data['Murl']['referer'] = $this->RequestHandler->getReferer();
-            $this->data['Murl']['agent'] = $_SERVER['HTTP_USER_AGENT'];
-
-            if ($this->Murl->validates($this->data)) {
-
-                /* reverse murl */
-                $found = stristr($this->data['Murl']['uri'],'http://murl.net/');
-                if ($found) {
-                    $this->redirect("/reverse/".substr($found, strlen('http://murl.net/')));
-		    exit();
-                }
-
-                $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));
-                if ($result) {
-                    $this->Session->setFlash('Entry already exists.');
-                    $this->set('code',$result['Murl']['code']);
-                    $this->set('params',$result['Murl']['code']);
-                } else {
-                    $this->Murl->create();
-                    if ($this->Murl->save($this->data)) {
-                        $id = $this->Murl->getInsertId();
-                        $code = $this->Murl->genCode($id);
-                        $delta = $this->Murl->getDelta($id);
-                        $crunch_msg = $this->Murl->getCrunch($delta);
-                        $this->Session->setFlash($crunch_msg.' Savings of '.$delta.' characters.');
-
-                        $this->set('params', 'Saved');
-                        $this->set('code',$code);
-                        unset($this->data["Murl"]);
-                    } else {
-                        $this->set('params', "No save");
-                    }
-                }
-            } else {
-                $this->set('params', "Bad");
-            }
-        }
-    }
-
+    
+    
     function process() {
-        $this->set('params','None');
-        if ($this->data) {
-            $code = $this->data['Murl']['code'];
-        } else {
-            $code = $this->params['url']['url'];
-        }
+#       $this->set('params','None');
+        $code = $this->params['url']['url'];
         $this->set('error', 0);
         $this->set('code', $code);
-        $this->set('message', $this->params);
+#       $this->set('message', $this->params);
         $result=$this->Murl->find('first', array('conditions' => array('Murl.code =' => $code)));
-
+        
         if ($result) {
             if ($result['Murl']['destruct'] && $result['Murl']['hits']) {
                 $this->Session->setFlash('Expired! This murl has self-destructed');
@@ -145,25 +94,55 @@ class MurlsController extends AppController {
             } else {
                 $this->Murl->updateAll(array('Murl.hits'=>'Murl.hits+1'), array('Murl.id'=>$result['Murl']['id']));
                 $this->redirect(urldecode(stripslashes($result['Murl']['uri'])));
-		exit();
+                exit();
             }
         } else {
             $this->Session->setFlash('What? Not sure what you mean.');
             $this->set('error', '404');
         }
     }
+    function random() {
+        $this->set('title_for_layout', "Random mURLs");
+        $this->Murl->recursive = 0;
+        $this->set('murls', $this->Murl->find('all', array(
+                'limit' => 1,
+                'order' => array('rand()'),
+        )));
+    }
 
-    function create() {
-        $this->set('code',0);
-        $this->set('params','None');
-        if (isset($this->params['url']['uri'])) {
-            $this->data['Murl']['uri'] = $this->params['url']['uri'];
-            $this->data['Murl']['protect'] = $this->params['url']['protect'];
-            $this->data['Murl']['private'] = $this->params['url']['private'];
-            $this->data['Murl']['destruct'] = $this->params['url']['destruct'];
+    function reverse() {
+        $this->set('title_for_layout', "Reverse mURL");
+        
+        $result = $this->Murl->find("first",array('conditions'=>array('Murl.code'=>$this->params["code"],'Murl.destruct'=>0)));
+        
+        $this->set('murl',$result);
+    }
+    
+    function search() {
+        $this->set('title_for_layout', "Search mURLs");
+        $this->Murl->recursive = 0;
+        if($this->data) {
+            $this->set('murls', $this->Murl->find('all', array(
+                    'limit' => 20,
+                    'order' => array('Murl.id DESC'),
+                    'conditions' => array('Murl.uri LIKE' => '%'.$this->data['Murl']['field'].'%')
+            )));
         }
+    }
+    
+    function top() {
+        $this->set('title_for_layout', "Top mURLs");
+        $this->Murl->recursive = 0 ;
+        $this->set('murls', $this->Murl->find('all', array(
+                'limit' => 20,
+                'order' => array('Murl.hits DESC'),
+        )));
+    }
 
-
+    function view() {
+        $this->set('title_for_layout', "View mURLs");
+        $this->Murl->recursive = 0;
+        $this->set('murls',$this->paginate());
     }
 }
 ?>

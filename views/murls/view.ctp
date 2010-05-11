@@ -72,3 +72,4 @@
 	 | <?php echo $this->Paginator->numbers() . "\n"?>
     <?php echo "\t ". $this->Paginator->next(__('next', true) .' >>', array(), null, array('class' => 'disabled')) . "\n";?>
 </div>
+<br /><br />

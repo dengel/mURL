@@ -1,4 +1,4 @@
-<?
+<?php
    $searchbox=0;
    if ($error == 401) {
       if ($this->data) {

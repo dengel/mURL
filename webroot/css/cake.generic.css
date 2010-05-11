@@ -536,6 +536,9 @@ div.code-coverage-results span.result-good {
 .small {
    font-size: 10px;
 }
+.big {
+   font-size: 16px;
+}
 .result {
    margin-left: auto;
    margin-right: auto;
