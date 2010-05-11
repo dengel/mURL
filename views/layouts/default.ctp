@@ -12,6 +12,9 @@
 
         echo $scripts_for_layout;
         ?>
+        <script type="text/javascript" src="js/clientcide.js"></script>
+        <script type="text/javascript" src="js/murl.js"></script>
+        <!--
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.load("prototype", "1.6.1.0");
@@ -25,6 +28,7 @@
                 }
             });
         </script>
+        -->
     </head>
     <body>
         <div id="container">

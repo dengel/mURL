@@ -30,7 +30,8 @@ $submit = array("Go, damn it!",
 
 echo $form->create();
 echo $form->input('Murl.uri', array('label' => 'Insert URL below:'));
-echo "<div id='options_div' style='display:none !important;'>";
+#echo "<div id='options_div' style='display:none !important;'>";
+echo "<div id='options_div'>";
 echo $form->input('Murl.protect',  array('div' => 'small'));
 echo $form->input('Murl.private',  array('div' => 'small'));
 echo $form->input('Murl.destruct', array('div' => 'small'));
