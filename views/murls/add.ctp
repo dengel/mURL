@@ -10,6 +10,5 @@ if (isset($code)) {
 <?php echo $this->element('murlForm'); ?>
 
 <div class="toright">
-    <? #echo $this->Html->link("Options","javascript:void(0);",array('id'=>"showOptions",'title'=>'Show Options')); ?>
     <? echo $this->Html->link("Options","#",array('id'=>"options_link",'title'=>'Show Options')); ?>
 </div>

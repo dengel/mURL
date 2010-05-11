@@ -12,23 +12,9 @@
 
         echo $scripts_for_layout;
         ?>
+        <!-- dengel: Quisiera mover esto al $scipt_for_layour pero no se como -->
         <script type="text/javascript" src="js/clientcide.js"></script>
         <script type="text/javascript" src="js/murl.js"></script>
-        <!--
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-            google.load("prototype", "1.6.1.0");
-            google.load("scriptaculous", "1.8.3");
-
-            google.setOnLoadCallback(function() {
-                $('showOptions').observe('click', showOptions);
-
-                function showOptions() {
-                    Effect.toggle('options_div','slide',{duration: 0.2});
-                }
-            });
-        </script>
-        -->
     </head>
     <body>
         <div id="container">

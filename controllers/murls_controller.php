@@ -31,7 +31,6 @@ class MurlsController extends AppController {
                 if ($result) {
                     $this->Session->setFlash('Entry already exists.');
                     $this->set('code',$result['Murl']['code']);
-#                   $this->set('params',$result['Murl']['code']);
                 } else {
                     $this->Murl->create();
                     if ($this->Murl->save($this->data)) {
@@ -41,15 +40,14 @@ class MurlsController extends AppController {
                         $crunch_msg = $this->Murl->getCrunch($delta);
                         $this->Session->setFlash($crunch_msg.' Savings of '.$delta.' characters.');
                         
-#                       $this->set('params', 'Saved');
                         $this->set('code',$code);
                         unset($this->data["Murl"]);
                     } else {
-#                       $this->set('params', "No save");
+                        $this->Session->setFlash("Error: Unable to save");
                     }
                 }
             } else {
-#               $this->set('params', "Bad");
+                $this->Session->setFlash("Error: Invalid parameters");
             }
         }
     }
@@ -74,11 +72,9 @@ class MurlsController extends AppController {
     
     
     function process() {
-#       $this->set('params','None');
         $code = $this->params['url']['url'];
         $this->set('error', 0);
         $this->set('code', $code);
-#       $this->set('message', $this->params);
         $result=$this->Murl->find('first', array('conditions' => array('Murl.code =' => $code)));
         
         if ($result) {
@@ -112,9 +108,7 @@ class MurlsController extends AppController {
 
     function reverse() {
         $this->set('title_for_layout', "Reverse mURL");
-        
         $result = $this->Murl->find("first",array('conditions'=>array('Murl.code'=>$this->params["code"],'Murl.destruct'=>0)));
-        
         $this->set('murl',$result);
     }
     
