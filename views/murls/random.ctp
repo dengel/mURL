@@ -4,6 +4,8 @@
 
 <h3>Preview:</h3>
 
-<i>iframe with destination URL slides out...</i>
+<iframe src ="<?php echo urldecode($murls[0]['Murl']['uri']); ?>" width="100%" height="300">
+  <p>Your browser does not support iframes.</p>
+</iframe>
 
 <br /><br />
