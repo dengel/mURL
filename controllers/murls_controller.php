@@ -41,7 +41,6 @@ class MurlsController extends AppController {
                         $this->Session->setFlash($crunch_msg.' Savings of '.$delta.' characters.');
                         
                         $this->set('code',$code);
-                        unset($this->data["Murl"]);
                     } else {
                         $this->Session->setFlash("Error: Unable to save");
                     }
