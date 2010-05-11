@@ -9,6 +9,7 @@
         echo $this->Html->meta('icon');
 
         echo $this->Html->css('cake.generic');
+        echo $this->Html->css('murl.specific');
 
         echo $scripts_for_layout;
         ?>
@@ -27,23 +28,9 @@
 
                 <?php echo $content_for_layout; ?>
 
-                <ul>
-                    <li><?= $this->Html->link("Archive","/view"); ?></li>
-                    <li><?= $this->Html->link("Random","/random"); ?></li>
-                    <li><?= $this->Html->link("Top","/top"); ?></li>
-                    <li><?= $this->Html->link("Search","/search"); ?></li>
-                </ul>
+                <?php echo $this->element("links"); ?>
 
-                <div class="tocenter">
-                    <?php
-                    if(Configure::read('debug') == 0) {
-                        echo $this->element("adsense");
-                    } else {
-                        echo "AdSense Place Holder";
-                    }
-
-                    ?>
-                </div>
+                <?php echo $this->element("adsense"); ?>
 
             </div>
             <div id="footer">
@@ -55,11 +42,13 @@
                 ?>
             </div>
         </div>
-        <?php echo "<small>Version: 0.4 Development</small>"; ?>
         <?php
         if(Configure::read('debug')) {
+            echo "<small><a href='#' id='beta_link' class='beta'>Version: 0.4 Development.</a></small>";
+            echo "<div id='beta_div'>";
             echo $this->element('sql_dump');
             pr($this->params);
+            echo "</div>";
         }
         ?>
         </body>
