@@ -17,16 +17,16 @@ class MurlsController extends AppController {
             $this->data['Murl']['remote'] = $this->RequestHandler->getClientIP();
             $this->data['Murl']['referer'] = $this->RequestHandler->getReferer();
             $this->data['Murl']['agent'] = $_SERVER['HTTP_USER_AGENT'];
-            
+
             if ($this->Murl->validates($this->data)) {
-                
+
                 /* reverse murl */
                 $found = stristr($this->data['Murl']['uri'],'http://murl.net/');
                 if ($found) {
                     $this->redirect("/reverse/".substr($found, strlen('http://murl.net/')));
                     exit();
                 }
-                
+
                 $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));
                 if ($result) {
                     $this->Session->setFlash('Entry already exists.');
@@ -39,7 +39,7 @@ class MurlsController extends AppController {
                         $delta = $this->Murl->getDelta($id);
                         $crunch_msg = $this->Murl->getCrunch($delta);
                         $this->Session->setFlash($crunch_msg.' Savings of '.$delta.' characters.');
-                        
+
                         $this->set('code',$code);
                     } else {
                         $this->Session->setFlash("Error: Unable to save");
@@ -50,7 +50,7 @@ class MurlsController extends AppController {
             }
         }
     }
-    
+
     function domain() {
         $all_murls  = $this->Murl->find('all', array('order' => array('Murl.id DESC')));
         foreach ($all_murls as $one_murl) {
@@ -68,14 +68,14 @@ class MurlsController extends AppController {
         $domain_hash=array_reverse($domain_hash);
         $this->set('domains', $domain_hash);
     }
-    
-    
+
+
     function process() {
         $code = $this->params['url']['url'];
         $this->set('error', 0);
         $this->set('code', $code);
         $result=$this->Murl->find('first', array('conditions' => array('Murl.code =' => $code)));
-        
+
         if ($result) {
             if ($result['Murl']['destruct'] && $result['Murl']['hits']) {
                 $this->Session->setFlash('Expired! This murl has self-destructed');
@@ -110,19 +110,24 @@ class MurlsController extends AppController {
         $result = $this->Murl->find("first",array('conditions'=>array('Murl.code'=>$this->params["code"],'Murl.destruct'=>0)));
         $this->set('murl',$result);
     }
-    
+
     function search() {
         $this->set('title_for_layout', "Search mURLs");
         $this->Murl->recursive = 0;
-        if($this->data) {
-            $this->set('murls', $this->Murl->find('all', array(
-                    'limit' => 20,
-                    'order' => array('Murl.id DESC'),
-                    'conditions' => array('Murl.uri LIKE' => '%'.$this->data['Murl']['field'].'%')
-            )));
+        if ($this->data) {
+            # Quiero poner esto en un modelo para poder usar el validate.
+            if (strlen($this->data['Murl']['field']) < 3 ) {
+                $this->Session->setFlash('Too short a criteria. Minimum of 3 characters required');
+            } else {
+                $this->set('murls', $this->Murl->find('all', array(
+                        'limit' => 20,
+                        'order' => array('Murl.id DESC'),
+                        'conditions' => array('Murl.uri LIKE' => '%'.$this->data['Murl']['field'].'%')
+                )));
+            }
         }
     }
-    
+
     function top() {
         $this->set('title_for_layout', "Top mURLs");
         $this->Murl->recursive = 0 ;

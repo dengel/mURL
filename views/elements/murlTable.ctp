@@ -1,3 +1,4 @@
+<? if (count($murls) > 0): ?>
 <table class="mstyle">
     <thead>
         <tr>
@@ -52,3 +53,12 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php if (count($murls) == 1): ?>
+<h3>Preview:</h3>
+<iframe src ="<?php echo urldecode($murls[0]['Murl']['uri']); ?>" width="100%" height="300">
+  <p>Your browser does not support iframes.</p>
+</iframe>
+<?php endif; ?>
+<?php else: ?>
+<b>No results found.</b><br />
+<?php endif; ?>

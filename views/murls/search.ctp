@@ -1,7 +1,7 @@
 <h2><?php echo $title_for_layout; ?></h2>
 
 <?php echo $this->Form->create(); ?>
-<?php echo $this->Form->input("field"); ?>
+<?php echo $this->Form->input("field", array("label" => "Criteria:")); ?>
 <?php echo $this->Form->end("Search"); ?>
 
 <?php if(isset($murls)): ?>
