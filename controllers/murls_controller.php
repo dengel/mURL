@@ -2,8 +2,7 @@
 class MurlsController extends AppController {
 
     var $name       = 'Murls';
-    var $helpers    = array('Html','Ajax','Javascript');
-    var $components = array('RequestHandler');
+
 
     var $paginate   = array(
             'limit' => 10,
@@ -24,7 +23,7 @@ class MurlsController extends AppController {
                 $found = stristr($this->data['Murl']['uri'],'http://murl.net/');
                 if ($found) {
                     $this->redirect("/reverse/".substr($found, strlen('http://murl.net/')));
-                    exit();
+                    exit(); // ta de más
                 }
 
                 $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));

@@ -40,6 +40,16 @@ Router::connect('/random/*', array('controller' => 'murls', 'action' => 'random'
 Router::connect('/search/*', array('controller' => 'murls', 'action' => 'search'));
 Router::connect('/reverse/:code', array('controller' => 'murls', 'action' => 'reverse'),array('code'=>'[0-9a-zA-Z]+'));
 
+/* API */
+Router::connect('/api/random', array('controller' => 'apis', 'action' => 'random'));
+Router::connect('/api/create/:uri',
+        array('controller' => 'apis', 'action' => 'create')
+        /*array(
+            'url'=>'^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+        )*/
+        );
+
+
 Router::connect('/create', array('controller' => 'murls', 'action' => 'add'));
 Router::connect('/', array('controller' => 'murls', 'action' => 'add'));
 Router::connect('/*', array('controller' => 'murls', 'action' => 'process'));
