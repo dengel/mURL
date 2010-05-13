@@ -31,7 +31,7 @@
  * @subpackage    cake.app
  */
 class AppController extends Controller {
-    var $helpers    = array('Html','Ajax','Javascript');
-    var $components = array('RequestHandler');
+    var $helpers    = array('Html','Ajax','Javascript','Session');
+    var $components = array('RequestHandler','Session');
 }
 ?>
