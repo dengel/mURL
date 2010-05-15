@@ -24,6 +24,16 @@ class ApisController extends AppController {
         $this->data['Murl']['agent'] = $_SERVER['HTTP_USER_AGENT'];
         $this->data['Murl']['uri'] = base64_decode($this->params["uri"]);
 
+        if(isset($this->params["destruct"])) {
+            $this->data['Murl']['destruct'] = $this->params['destruct'];
+        }
+        if(isset($this->params["protect"])) {
+            $this->data['Murl']['protect'] = $this->params["protect"];
+        }
+        if(isset($this->params["private"])) {
+            $this->data['Murl']['private'] = $this->params['private'];
+        }
+
         if ($this->Murl->validates($this->data)) {
             $found = stristr($this->data['Murl']['uri'],'http://murl.net/');
             if ($found) {

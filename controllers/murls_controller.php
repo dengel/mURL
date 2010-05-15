@@ -68,7 +68,6 @@ class MurlsController extends AppController {
         $this->set('domains', $domain_hash);
     }
 
-
     function process() {
         $code = $this->params['url']['url'];
         $this->set('error', 0);
@@ -95,6 +94,7 @@ class MurlsController extends AppController {
             $this->set('error', '404');
         }
     }
+
     function random() {
         $this->set('title_for_layout', "Random mURLs");
         $this->Murl->recursive = 0;
