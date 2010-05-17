@@ -18,6 +18,15 @@ class ApisController extends AppController {
         )));
     }
 
+    function last() {
+
+        $this->Murl->recursive = 0;
+        $this->set('murls', $this->Murl->find('all', array(
+                'limit' => 1,
+                'order' => array('Murl.id DESC'),
+        )));
+    }
+
     function create() {
         $this->data['Murl']['remote'] = $this->RequestHandler->getClientIP();
         $this->data['Murl']['referer'] = $this->RequestHandler->getReferer();
