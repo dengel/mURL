@@ -78,3 +78,10 @@ table.mstyle tr:nth-child(odd) {
 .nobreak {
   white-space: nowrap;
 }
+
+.social {
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   padding: 0.5em 0.5em;
+}
