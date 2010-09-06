@@ -6,8 +6,10 @@
             <th><?php __("Url"); ?></th>
             <th><?php __("Hits"); ?></th>
             <th><?php __("Date");?></th>
+<!--
             <th><?php __("Remote");?></th>
             <th><?php __("Referer"); ?></th>
+-->
         </tr>
     </thead>
     <tbody>
@@ -31,12 +33,14 @@
                 }
                 ?>
             </td>
+<!--
             <td>
                 <?php echo  $html->link($murl['Murl']['remote'],"http://api.hostip.info/get_html.php?ip=".$murl['Murl']['remote']."&position=true") ?>
             </td>
             <td>
                 <?php echo $murl['Murl']['referer'] ?>
             </td>
+-->
         </tr>
         <tr>
             <td>
