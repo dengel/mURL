@@ -1,7 +1,7 @@
 
 <?php
 if (isset($code)) {
-    echo "<div class='result'>";
+    echo "<div class='success'>";
     echo $html->link("http://murl.net/".$code, "/".$code, array('class' => 'result_text'));
     echo "</div>";
     echo $this->element('social');

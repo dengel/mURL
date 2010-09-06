@@ -115,13 +115,13 @@ p.menu {
 }
 
 p.mtitle {
-	display: block;
+   display: block;
    margin-left: auto;
    margin-right: auto;
    text-align: center;
    text-align: center;
    white-space: nowrap;
-	margin-bottom:10px;
+   margin-bottom:10px;
    font-family: 'Inconsolata', serif;
    font-size: 48px;
    font-style: normal;
@@ -167,3 +167,35 @@ div.radio label {
 	margin: 0 0 6px 20px;
 }
 
+.message {
+	font-family: 'Inconsolata', serif;
+	font-size: 12px;
+	background:#e5ecf9;
+	color:#111f8a;
+	border-color:#c2c4fb;
+}
+
+.success {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   text-align: center;
+   white-space: nowrap;
+   margin-bottom:10px;
+   font-family: 'Inconsolata', serif;
+   font-size: 48px;
+   font-style: normal;
+   font-weight: 700;
+   text-decoration: none;
+   text-transform: none;
+   word-spacing: 0em;
+   line-height: 1em;
+}
+div.error-message {
+	padding: 6px 10px;
+	clear: both;
+	color: #8a1f11;
+	font-weight: bold;
+	background: #fbc2c4;
+}
