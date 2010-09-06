@@ -7,7 +7,7 @@ Setup
 -------
 
 * Download the latest from GitHub onto a new directory hierarchy.
-* Download the latest cakePHP from [http://www.cakephp.org/](their website).
+* Download the latest [http://github.com/cakephp/cakephp/tree/1.3](cakePHP 1.3).
 
 Database
 ------------
