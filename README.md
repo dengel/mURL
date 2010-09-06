@@ -7,7 +7,9 @@ Setup
 -------
 
 * Download the latest from GitHub onto a new directory hierarchy.
-* Download the latest [http://github.com/cakephp/cakephp/tree/1.3](cakePHP 1.3).
+* Download the latest [cakePHP1.3](http://github.com/cakephp/cakephp/tree/1.3) and place at same level as this README file as *cake*.
+* Create MySQL database with the sctructure defined below.
+* Create file config/database.php based on the sample provided.
 
 Database
 ------------
