@@ -44,14 +44,15 @@
             </div>
             <div id="footer" class="span-24 last">
 		<br />&nbsp;<br />&nbsp;
-                <?php echo $this->Html->link(
-                $this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
+		<?php
+		if(Configure::read('debug')) {
+
+		echo $this->Html->link(
+		$this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
                 'http://book.cakephp.org/view/875/x1-3-Collection',
                 array('target' => '_blank', 'escape' => false)
                 );
-                ?>
-		<?php
-		if(Configure::read('debug')) {
+
 		echo "<br /><small><a href='#' id='beta_link' class='beta'>Version: 0.5 Development.</a></small>";
 			echo "<div id='beta_div'>";
 			echo $this->element('sql_dump');
