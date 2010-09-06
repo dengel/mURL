@@ -112,9 +112,10 @@ class MurlsController extends AppController {
         $this->set('title_for_layout', "Random mURLs");
         $this->Murl->recursive = 0;
         $this->set('murls', $this->Murl->find('all', array(
-                    'limit' => 1,
-                    'order' => array('rand()'),
-                )));
+           'conditions' => array('Murl.Private = ' => 0, 'Murl.Destruct = ' => 0),
+           'limit' => 1,
+           'order' => array('rand()'),
+        )));
     }
 
     function reverse() {
@@ -144,15 +145,16 @@ class MurlsController extends AppController {
         $this->set('title_for_layout', "Top mURLs");
         $this->Murl->recursive = 0;
         $this->set('murls', $this->Murl->find('all', array(
-                    'limit' => 20,
-                    'order' => array('Murl.hits DESC'),
-                )));
+           'conditions' => array('Murl.Private = ' => 0, 'Murl.Destruct = ' => 0),
+           'limit' => 20,
+           'order' => array('Murl.hits DESC'),
+        )));
     }
 
     function view() {
         $this->set('title_for_layout', "View mURLs");
         $this->Murl->recursive = 0;
-        $this->set('murls', $this->paginate());
+        $this->set('murls', $this->paginate('Murl', array('Murl.Private = 0 AND (Murl.Destruct = 0 OR (Murl.Destruct = 1 AND Murl.Hits > 1)) ')));
     }
 
     function info() {
