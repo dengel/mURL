@@ -8,48 +8,59 @@
         <?php
         echo $this->Html->meta('icon');
 
-        echo $this->Html->css('cake.generic');
+        echo $this->Html->css('blueprint');
         echo $this->Html->css('murl.specific');
 
         echo $scripts_for_layout;
         ?>
         <!-- dengel: Quisiera mover esto al $scipt_for_layour pero no se como -->
+	<link  href="//fonts.googleapis.com/css?family=Inconsolata:regular" rel="stylesheet" type="text/css" >
         <script type="text/javascript" src="js/clientcide.js"></script>
         <script type="text/javascript" src="js/murl.js"></script>
     </head>
     <body>
-        <div id="container">
-            <div id="header">
-                <h1><?php echo $this->Html->link(__('mURL: fast, free and useful.', true), '/'); ?></h1>
+        <div id="container" class="container">
+		<div id="topmenu" class="span-24 last">
+			<p class="menu">
+			<?php echo $this->element("links"); ?>
+			</p>
+			<hr>
+		</div>
+            <div id="header" class="span-24 last">
+		<br />&nbsp;<br />&nbsp;
+                <p class="mtitle"><?php echo $this->Html->link(__('mURL: fast, free and useful.', true), '/'); ?></p>
+		<br />&nbsp;<br />&nbsp;
             </div>
-            <div id="content">
+            <div id="content" class="span-24 last">
 
                 <?php echo $this->Session->flash(); ?>
 
                 <?php echo $content_for_layout; ?>
 
-                <?php echo $this->element("links"); ?>
+		<hr>
 
                 <?php echo $this->element("adsense"); ?>
 
             </div>
-            <div id="footer">
+            <div id="footer" class="span-24 last">
+		<br />&nbsp;<br />&nbsp;
                 <?php echo $this->Html->link(
                 $this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
                 'http://book.cakephp.org/view/875/x1-3-Collection',
                 array('target' => '_blank', 'escape' => false)
                 );
                 ?>
+		<?php
+		if(Configure::read('debug')) {
+		echo "<br /><small><a href='#' id='beta_link' class='beta'>Version: 0.5 Development.</a></small>";
+			echo "<div id='beta_div'>";
+			echo $this->element('sql_dump');
+			pr($this->params);
+			echo "</div>";
+		}
+		?>
+		<br />&nbsp;<br />&nbsp;
             </div>
         </div>
-        <?php
-        if(Configure::read('debug')) {
-            echo "<small><a href='#' id='beta_link' class='beta'>Version: 0.5 Development.</a></small>";
-            echo "<div id='beta_div'>";
-            echo $this->element('sql_dump');
-            pr($this->params);
-            echo "</div>";
-        }
-        ?>
         </body>
         </html>

@@ -36,12 +36,12 @@ a.result_text:hover {
    text-align: center;
 }
 a.beta {
-	color: #F0F0F0;
+	color: #CCC;
 	text-decoration: none;
 	font-weight: bold;
 }
 a.beta:hover {
-	color: #F0FFF0;
+	color: #CCF;
 	text-decoration:none;
 }
 
@@ -85,3 +85,85 @@ table.mstyle tr:nth-child(odd) {
    text-align: center;
    padding: 0.5em 0.5em;
 }
+
+.mtext {
+   background: none repeat scroll 0% 0% rgb(255, 255, 255); 
+   border-width: 1px; 
+   border-style: solid; 
+   border-color: rgb(204, 204, 204) rgb(153, 153, 153) rgb(153, 153, 153) rgb(204, 204, 204); 
+   color: rgb(0, 0, 0); 
+   font: 18px arial,sans-serif bold; 
+   height: 25px; 
+   margin: 0pt; 
+   padding: 5px 8px 0pt 6px; 
+   vertical-align: top;
+   width: 98%;
+}
+
+label {
+	display: block;
+	font-size: 110%;
+	margin-bottom:3px;
+}
+
+p.menu {
+   float: right;
+   white-space: nowrap;
+   font-size: 10px;
+	display: block;
+	margin-bottom:1px;
+}
+
+p.mtitle {
+	display: block;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   text-align: center;
+   white-space: nowrap;
+	margin-bottom:10px;
+   font-family: 'Inconsolata', serif;
+   font-size: 48px;
+   font-style: normal;
+   font-weight: 700;
+   text-decoration: none;
+   text-transform: none;
+   word-spacing: 0em;
+   line-height: 1em;
+}
+
+input[type=submit] {
+	font-weight:normal;
+	padding: 6px 10px;
+	color:#000;
+	border-color: #2d6324;
+	border:1px solid;
+	border-radius:8px;
+	text-decoration:none;
+	min-width: 0;
+	display: inline;
+	font-size: 150%;
+	width: auto;
+}
+input[type=submit]:hover {
+	color:#fff;
+	background: #08d;
+}
+input[type=checkbox] {
+	clear: left;
+	float: left;
+	margin: 0px 6px 7px 2px;
+	width: auto;
+}
+div.checkbox label {
+	display: inline;
+}
+input[type=radio] {
+	float:left;
+	width:auto;
+	margin: 0 3px 7px 0;
+}
+div.radio label {
+	margin: 0 0 6px 20px;
+}
+

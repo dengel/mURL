@@ -29,13 +29,15 @@ $submit = array("Go, damn it!",
 );
 
 echo $form->create();
-echo $form->input('Murl.uri', array('label' => 'Insert URL below:'));
-echo "<div id='options_div'>";
-echo $form->input('Murl.protect',  array('div' => 'small'));
-echo $form->input('Murl.private',  array('div' => 'small'));
-echo $form->input('Murl.destruct', array('div' => 'small'));
+echo $form->input('Murl.uri', array('label' => 'Insert URL below:<br />','class' => 'mtext'));
+echo "<div id='options_div' class='options'>";
+echo $form->input('Murl.protect');
+echo $form->input('Murl.private');
+echo $form->input('Murl.destruct');
 echo "</div>";
 
+echo "<div class='tocenter'>";
 echo $form->end($submit[array_rand($submit)]);
+echo "</div>";
 
 ?>

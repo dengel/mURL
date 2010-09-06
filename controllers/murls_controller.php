@@ -10,6 +10,11 @@ class MurlsController extends AppController {
         )
     );
 
+    function beforeRender() {
+        $this->layout = "murl";
+        Configure::write('debug',1);
+    }
+
     function add() {
         if ($this->data) {
 
