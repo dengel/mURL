@@ -12,7 +12,7 @@ class MurlsController extends AppController {
 
     function beforeRender() {
         $this->layout = "murl";
-        Configure::write('debug',1);
+        Configure::write('debug',0);
     }
 
     function add() {
@@ -153,6 +153,10 @@ class MurlsController extends AppController {
         $this->set('title_for_layout', "View mURLs");
         $this->Murl->recursive = 0;
         $this->set('murls', $this->paginate());
+    }
+
+    function info() {
+        $this->set('title_for_layout', "mURL Info");
     }
 
 }

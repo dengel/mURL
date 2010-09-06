@@ -1,4 +1,5 @@
-<?= $this->Html->link("Top","/top"); ?> | 
-<?= $this->Html->link("Random","/random"); ?> | 
-<?= $this->Html->link("Search","/search"); ?> | 
-<?= $this->Html->link("Archive","/view"); ?>
+<?= $this->Html->link("top","/top"); ?> | 
+<?= $this->Html->link("random","/random"); ?> | 
+<?= $this->Html->link("search","/search"); ?> | 
+<?= $this->Html->link("archive","/view"); ?> | 
+<?= $this->Html->link("api","/info"); ?>

@@ -38,6 +38,7 @@ Router::connect('/view/*', array('controller' => 'murls', 'action' => 'view'));
 Router::connect('/top/*', array('controller' => 'murls', 'action' => 'top'));
 Router::connect('/random/*', array('controller' => 'murls', 'action' => 'random'));
 Router::connect('/search/*', array('controller' => 'murls', 'action' => 'search'));
+Router::connect('/info/*', array('controller' => 'murls', 'action' => 'info'));
 Router::connect('/reverse/:code', array('controller' => 'murls', 'action' => 'reverse'),array('code'=>'[0-9a-zA-Z]+'));
 
 /* API */
