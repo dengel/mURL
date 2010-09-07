@@ -120,8 +120,11 @@ class MurlsController extends AppController {
 
     function reverse() {
         $this->set('title_for_layout', "Reverse mURL");
-        $result = $this->Murl->find("first", array('conditions' => array('Murl.code' => $this->params["code"], 'Murl.destruct' => 0)));
-        $this->set('murl', $result);
+        $this->Murl->recursive = 0;
+        $this->set('murls', $this->Murl->find('all', array(
+           'conditions' => array('Murl.code = ' => $this->params["code"], 'Murl.Destruct = ' => 0),
+           'limit' => 1,
+        )));
     }
 
     function search() {
