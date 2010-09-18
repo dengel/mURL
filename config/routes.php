@@ -33,6 +33,12 @@
  */
 /* Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display')); */
 
+/* Admin stuff */
+//Router::connect('/login', array('controller' => 'users','action'=>'login'));
+//Router::connect('/logout', array('controller' => 'users','action'=>'logout'));
+Router::connect('/admin/:controller/:action/*', array('prefix' => 'admin', 'admin' => true));
+
+
 /* Murl stuff */
 Router::connect('/view/*', array('controller' => 'murls', 'action' => 'view'));
 Router::connect('/top/*', array('controller' => 'murls', 'action' => 'top'));

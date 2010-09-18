@@ -34,7 +34,7 @@ Database
       PRIMARY KEY  (`id`)
     ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
     SET character_set_client = @saved_cs_client;
-    
+   
     --
     -- Table structure for table `murls`
     --
@@ -43,7 +43,7 @@ Database
     SET @saved_cs_client     = @@character_set_client;
     SET character_set_client = utf8;
     CREATE TABLE `murls` (
-      `id` int(11) NOT NULL auto_increment,
+     `id` int(11) NOT NULL auto_increment,
       `code` varchar(255) NOT NULL default '',
       `protect` varchar(255) NOT NULL,
       `uri` varchar(255) NOT NULL,
@@ -58,6 +58,20 @@ Database
       PRIMARY KEY  (`id`),
       UNIQUE KEY `nick` (`code`),
       KEY `nick_index` (`code`(10))
+    ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+    SET character_set_client = @saved_cs_client;
+
+    DROP TABLE IF EXISTS `bans`;
+    SET @saved_cs_client     = @@character_set_client;
+    SET character_set_client = utf8;
+    CREATE TABLE `bans`(
+      `id` int(11) NOT NULL auto_increment,
+      `type` enum('ip','domain') NOT NULL default 'ip',
+      `user_id` int(11) NOT NULL,
+      `string` varchar(255) NOT NULL,
+      `created` datetime default NULL,
+      `modified` datetime default NULL,
+      PRIMARY KEY  (`id`)
     ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
     SET character_set_client = @saved_cs_client;
 

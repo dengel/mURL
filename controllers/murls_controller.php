@@ -9,10 +9,11 @@ class MurlsController extends AppController {
             'Murl.id' => 'desc'
         )
     );
+    var $uses = array('Murl', 'Ban');
 
     function beforeRender() {
         $this->layout = "murl";
-        Configure::write('debug',0);
+        Configure::write('debug', 0);
     }
 
     function add() {
@@ -23,6 +24,14 @@ class MurlsController extends AppController {
             $this->data['Murl']['agent'] = $_SERVER['HTTP_USER_AGENT'];
 
             if ($this->Murl->validates($this->data)) {
+
+                $domain = $this->Murl->getHost($this->data['Murl']['uri']);
+                $domain_banned = $this->Ban->find('first', array('conditions' => array('Ban.ban' => $domain)));
+                if (count($domain_banned) > 0) {
+                    $this->Ban->updateAll(array('Ban.hits' => 'Ban.hits+1'), array('Ban.id' => $domain_banned["Ban"]["id"]));
+                    $this->Session->setFlash("The domain " . $domain . " is banned");
+                    $this->redirect("/");
+                }
 
                 /* reverse murl */
                 $found = stristr($this->data['Murl']['uri'], 'http://murl.net/');
@@ -112,19 +121,19 @@ class MurlsController extends AppController {
         $this->set('title_for_layout', "Random mURLs");
         $this->Murl->recursive = 0;
         $this->set('murls', $this->Murl->find('all', array(
-           'conditions' => array('Murl.Private = ' => 0, 'Murl.Destruct = ' => 0),
-           'limit' => 1,
-           'order' => array('rand()'),
-        )));
+                    'conditions' => array('Murl.Private = ' => 0, 'Murl.Destruct = ' => 0),
+                    'limit' => 1,
+                    'order' => array('rand()'),
+                )));
     }
 
     function reverse() {
         $this->set('title_for_layout', "Reverse mURL");
         $this->Murl->recursive = 0;
         $this->set('murls', $this->Murl->find('all', array(
-           'conditions' => array('Murl.code = ' => $this->params["code"], 'Murl.Destruct = ' => 0),
-           'limit' => 1,
-        )));
+                    'conditions' => array('Murl.code = ' => $this->params["code"], 'Murl.Destruct = ' => 0),
+                    'limit' => 1,
+                )));
     }
 
     function search() {
@@ -148,10 +157,10 @@ class MurlsController extends AppController {
         $this->set('title_for_layout', "Top mURLs");
         $this->Murl->recursive = 0;
         $this->set('murls', $this->Murl->find('all', array(
-           'conditions' => array('Murl.Private = ' => 0, 'Murl.Destruct = ' => 0),
-           'limit' => 20,
-           'order' => array('Murl.hits DESC'),
-        )));
+                    'conditions' => array('Murl.Private = ' => 0, 'Murl.Destruct = ' => 0),
+                    'limit' => 20,
+                    'order' => array('Murl.hits DESC'),
+                )));
     }
 
     function view() {
@@ -165,4 +174,5 @@ class MurlsController extends AppController {
     }
 
 }
+
 ?>

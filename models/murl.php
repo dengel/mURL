@@ -11,7 +11,6 @@ class Murl extends AppModel {
             'message' => 'Please provide an URL to crunch.'
         )
     );
-
     var $hasMany = array('Hit');
 
     function genCode($id) {
@@ -47,5 +46,11 @@ class Murl extends AppModel {
         return strlen($result['Murl']['uri']) - (strlen($result['Murl']['code']) + strlen('http://murl.net/'));
     }
 
+    function getHost($Address) {
+        $parseUrl = parse_url(trim($Address));
+        return trim($parseUrl["host"] ? $parseUrl["host"] : array_shift(explode('/', $parseUrl["path"], 2)));
+    }
+
 }
+
 ?>
