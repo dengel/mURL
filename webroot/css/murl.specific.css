@@ -199,3 +199,4 @@ div.error-message {
 	font-weight: bold;
 	background: #fbc2c4;
 }
+.nobr {white-space: nowrap}

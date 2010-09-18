@@ -43,7 +43,7 @@
                 <?php #echo $murl['Murl']['referer'] ?>
             </td>
 -->
-<td>
+<td class="nobr">
 <?php $thisurl = 'http://' . $_SERVER['SERVER_NAME'] . "/" . $murl['Murl']['code']; ?>
 <a href='http://reddit.com/submit?url=<?php echo $thisurl ?>' title="Submit to Reddit"><img src="http://i.imgur.com/images/reddit.png" alt="Submit to Reddit" /></a>
 <a href='http://www.digg.com/submit?phase=2&url=<?php echo $thisurl ?>' title="Submit to Digg"><img src="http://i.imgur.com/images/digg.png" alt="Submit to Digg" /></a>
