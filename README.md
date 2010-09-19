@@ -75,6 +75,17 @@ Database
     ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
     SET character_set_client = @saved_cs_client;
 
+    DROP TABLE IF EXISTS `users`;
+    SET @saved_cs_client     = @@character_set_client;
+    SET character_set_client = utf8;
+    CREATE TABLE IF NOT EXISTS `users` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `username` char(50) DEFAULT NULL,
+        `password` char(40) DEFAULT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+    SET character_set_client = @saved_cs_client;
+
 Contributing
 ------------
 
