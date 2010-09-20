@@ -36,7 +36,7 @@
 /* Admin stuff */
 //Router::connect('/login', array('controller' => 'users','action'=>'login'));
 //Router::connect('/logout', array('controller' => 'users','action'=>'logout'));
-//Router::connect('/admin/:controller/:action/*', array('prefix' => 'admin', 'admin' => true));
+Router::connect('/admin/:controller/:action/*', array('prefix' => 'admin', 'admin' => true));
 
 
 /* Murl stuff */
