@@ -61,19 +61,16 @@ Database
     ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
     SET character_set_client = @saved_cs_client;
 
-    DROP TABLE IF EXISTS `bans`;
-    SET @saved_cs_client     = @@character_set_client;
-    SET character_set_client = utf8;
-    CREATE TABLE `bans`(
-      `id` int(11) NOT NULL auto_increment,
-      `type` enum('ip','domain') NOT NULL default 'ip',
-      `user_id` int(11) NOT NULL,
-      `string` varchar(255) NOT NULL,
-      `created` datetime default NULL,
-      `modified` datetime default NULL,
-      PRIMARY KEY  (`id`)
-    ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
-    SET character_set_client = @saved_cs_client;
+CREATE TABLE IF NOT EXISTS `bans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `ban` varchar(255) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `message` varchar(255) NOT NULL,
+  `hits` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
     DROP TABLE IF EXISTS `users`;
     SET @saved_cs_client     = @@character_set_client;

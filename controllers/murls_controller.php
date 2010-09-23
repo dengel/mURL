@@ -27,7 +27,7 @@ class MurlsController extends AppController {
 
                 $domain = $this->Murl->getHost($this->data['Murl']['uri']);
                 $domain_banned = $this->Ban->find('first', array('conditions' => array('Ban.ban' => $domain)));
-                if (count($domain_banned) > 0) {
+                if (count($domain_banned['Ban']) > 0) {
                     $this->Ban->updateAll(array('Ban.hits' => 'Ban.hits+1'), array('Ban.id' => $domain_banned["Ban"]["id"]));
                     $this->Session->setFlash("The domain " . $domain . " is banned");
                     $this->redirect("/");
