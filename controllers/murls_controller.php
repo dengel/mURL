@@ -29,7 +29,7 @@ class MurlsController extends AppController {
                 $domain_banned = $this->Ban->find('first', array('conditions' => array('Ban.ban' => $domain)));
                 if (count($domain_banned['Ban']) > 0) {
                     $this->Ban->updateAll(array('Ban.hits' => 'Ban.hits+1'), array('Ban.id' => $domain_banned["Ban"]["id"]));
-                    $this->Session->setFlash("The domain " . $domain . " is banned");
+                    $this->Session->setFlash("The domain <b>" . $domain . "</b> is banned: <i>" . $domain_banned['Ban']['message'] . "</i>");
                     $this->redirect("/");
                 }
 
@@ -37,7 +37,6 @@ class MurlsController extends AppController {
                 $found = stristr($this->data['Murl']['uri'], 'http://murl.net/');
                 if ($found) {
                     $this->redirect("/reverse/" . substr($found, strlen('http://murl.net/')));
-                    exit(); // ta de más
                 }
 
                 $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));
