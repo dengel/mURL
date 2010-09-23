@@ -13,7 +13,6 @@ class MurlsController extends AppController {
 
     function beforeRender() {
         $this->layout = "murl";
-        Configure::write('debug', 0);
     }
 
     function add() {
@@ -31,12 +30,6 @@ class MurlsController extends AppController {
                     $this->Ban->updateAll(array('Ban.hits' => 'Ban.hits+1'), array('Ban.id' => $domain_banned["Ban"]["id"]));
                     $this->Session->setFlash("The domain <b>" . $domain . "</b> is banned: " . $domain_banned['Ban']['message']);
                     $this->redirect("/");
-                }
-
-                /* reverse murl */
-                $found = stristr($this->data['Murl']['uri'], 'http://murl.net/');
-                if ($found) {
-                    $this->redirect("/reverse/" . substr($found, strlen('http://murl.net/')));
                 }
 
                 $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));

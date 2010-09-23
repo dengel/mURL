@@ -43,7 +43,7 @@ class Murl extends AppModel {
     function getDelta($id) {
         $result = $this->find('first', array('conditions' => array('Murl.id' => $id)));
 
-        return strlen($result['Murl']['uri']) - (strlen($result['Murl']['code']) + strlen('http://murl.net/'));
+        return strlen($result['Murl']['uri']) - (strlen($result['Murl']['code']) + strlen(Configure::read('murl.domain')));
     }
 
     function getHost($Address) {

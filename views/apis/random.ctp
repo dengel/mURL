@@ -1,5 +1,5 @@
 <?php 
 foreach($murls as $murl) {
-  echo "http://murl.net/".$murl['Murl']['code'];
+  echo "http://".Configure::read('murl.domain')."/".$murl['Murl']['code'];
 }
 ?>

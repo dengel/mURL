@@ -1,6 +1,6 @@
 <?php
 if($error == 0) {
-    echo "http://murl.net/".$code;
+    echo "http://".Configure::read('murl.domain')."/".$code;
 }
 else {
     echo $error;

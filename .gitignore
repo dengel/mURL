@@ -1,4 +1,5 @@
 config/database.php
+config/murl.php
 cake/*
 tmp/*
 nbproject/*
