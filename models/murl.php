@@ -48,7 +48,7 @@ class Murl extends AppModel {
 
     function getHost($Address) {
         $parseUrl = parse_url(trim($Address));
-        return trim($parseUrl["host"] ? $parseUrl["host"] : array_shift(explode('/', $parseUrl["path"], 2)));
+        return trim(isset($parseUrl["host"]) ? $parseUrl["host"] : array_shift(explode('/', $parseUrl["path"], 2)));
     }
 
 }
