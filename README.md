@@ -11,6 +11,7 @@ Setup
 * Create MySQL database with the sctructure defined below.
 * Create file config/database.php based on the sample provided.
 * Create file config/murl.php based on the sample provided.
+* Add a ban to the domain hosting mURL to prevent loops.
 
 Database
 ------------
@@ -62,16 +63,23 @@ Database
     ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
     SET character_set_client = @saved_cs_client;
 
-CREATE TABLE IF NOT EXISTS `bans` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `ban` varchar(255) NOT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  `message` varchar(255) NOT NULL,
-  `hits` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+    --
+    -- Table structure for table `bans`
+    --
+    CREATE TABLE IF NOT EXISTS `bans` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `user_id` int(11) NOT NULL,
+      `ban` varchar(255) NOT NULL,
+      `created` datetime DEFAULT NULL,
+      `modified` datetime DEFAULT NULL,
+      `message` varchar(255) NOT NULL,
+      `hits` int(11) NOT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+    --
+    -- Table structure for table `users`
+    --
 
     DROP TABLE IF EXISTS `users`;
     SET @saved_cs_client     = @@character_set_client;
