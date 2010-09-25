@@ -2,7 +2,7 @@
 <?php
 if (isset($code)) {
     echo "<div class='success'>";
-    echo $html->link("http://".Configure::read('murl.domain')."/".$code, "/".$code, array('class' => 'result_text'));
+    echo $html->link("http://".$app_domain."/".$code, "/".$code, array('class' => 'result_text'));
     echo "</div>";
     echo $this->element('social');
 }

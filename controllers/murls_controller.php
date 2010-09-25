@@ -13,6 +13,9 @@ class MurlsController extends AppController {
 
     function beforeRender() {
         $this->layout = "murl";
+        $this->set('app_domain',  $this->Murl->getAppDomain());
+        $this->set('app_slogan',  $this->Murl->getAppSlogan());
+        $this->set('app_version', $this->Murl->getAppVersion());
     }
 
     function add() {

@@ -35,6 +35,8 @@ class ApisController extends AppController {
     }
 
     function create() {
+        global $errors_msg;
+
         $this->data['Murl']['remote'] = $this->RequestHandler->getClientIP();
         $this->data['Murl']['referer'] = $this->RequestHandler->getReferer();
         $this->data['Murl']['agent'] = $_SERVER['HTTP_USER_AGENT'];

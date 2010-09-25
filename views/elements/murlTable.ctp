@@ -18,7 +18,7 @@
         <tr>
             <td>
 		<?php $reverse = $this->params['action'] == 'reverse' ? "" : "reverse/"; ?>
-                <?php echo $html->link("http://".Configure::read('murl.domain')."/".$murl['Murl']['code'], "/".$reverse.$murl['Murl']['code']);  ?>
+                <?php echo $html->link("http://".$app_domain."/".$murl['Murl']['code'], "/".$reverse.$murl['Murl']['code']);  ?>
             </td>
 
             <td>

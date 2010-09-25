@@ -3,7 +3,7 @@
     <head>
         <?php echo $this->Html->charset(); ?>
         <title>
-            <?php __('mURL: fast, free and useful.'); ?> -  <?php echo $title_for_layout; ?>
+            <?php __($app_slogan); ?> -  <?php echo $title_for_layout; ?>
         </title>
         <?php
         echo $this->Html->meta('icon');
@@ -28,7 +28,7 @@
 		</div>
             <div id="header" class="span-24 last">
 		<br />&nbsp;<br />&nbsp;
-                <p class="mtitle"><?php echo $this->Html->link(__('mURL: fast, free and useful.', true), '/'); ?></p>
+                <p class="mtitle"><?php echo $this->Html->link(__($app_slogan, true), '/'); ?></p>
 		<br />&nbsp;<br />&nbsp;
             </div>
             <div id="content" class="span-24 last">

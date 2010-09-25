@@ -43,12 +43,24 @@ class Murl extends AppModel {
     function getDelta($id) {
         $result = $this->find('first', array('conditions' => array('Murl.id' => $id)));
 
-        return strlen($result['Murl']['uri']) - (strlen($result['Murl']['code']) + strlen(Configure::read('murl.domain')));
+        return strlen($result['Murl']['uri']) - (strlen($result['Murl']['code']) + strlen($this->getAppDomain()));
     }
 
     function getHost($Address) {
         $parseUrl = parse_url(trim($Address));
         return trim(isset($parseUrl["host"]) ? $parseUrl["host"] : array_shift(explode('/', $parseUrl["path"], 2)));
+    }
+
+    function getAppDomain() {
+        return Configure::read('murl.domain') ? Configure::read('murl.domain') : "fix.me";
+    }
+
+    function getAppSlogan() {
+        return Configure::read('murl.slogan') ? Configure::read('murl.slogan') : "Long URL comes in, short URL goes out";
+    }
+
+    function getAppVersion() {
+        return Configure::read('murl.version') ? Configure::read('murl.version') : "1.0";
     }
 
 }
