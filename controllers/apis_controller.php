@@ -14,6 +14,9 @@ class ApisController extends AppController {
     function beforeRender() {
         $this->layout = "ajax";
         Configure::write('debug', 0);
+        $this->set('app_domain',  $this->Murl->getAppDomain());
+        $this->set('app_slogan',  $this->Murl->getAppSlogan());
+        $this->set('app_version', $this->Murl->getAppVersion());
     }
 
     function random() {
@@ -40,7 +43,7 @@ class ApisController extends AppController {
         $this->data['Murl']['remote'] = $this->RequestHandler->getClientIP();
         $this->data['Murl']['referer'] = $this->RequestHandler->getReferer();
         $this->data['Murl']['agent'] = $_SERVER['HTTP_USER_AGENT'];
-        $this->data['Murl']['uri'] = base64_decode($this->params["uri"]);
+        $this->data['Murl']['uri'] = trim(base64_decode($this->params["uri"]));
         $this->data['Murl']['private'] = 1;
 
         if (isset($this->params["destruct"])) {
@@ -57,13 +60,12 @@ class ApisController extends AppController {
 
             $domain = $this->Murl->getHost($this->data['Murl']['uri']);
             $domain_banned = $this->Ban->find('first', array('conditions' => array('Ban.ban' => $domain)));
-            
-            if (count($domain_banned) > 0) {
+            if (count($domain_banned['Ban']) > 0) {
                 /* stats */
                 $this->Ban->updateAll(array('Ban.hits' => 'Ban.hits+1'), array('Ban.id' => $domain_banned["Ban"]["id"]));
 
-                $this->set('error', 1);
-                $this->set('error_msg', $errors_msg["3"]);
+                $this->set('error', 3 );
+                $this->set('error_msg', $errors_msg['3']);
             } else {
 
                 $result = $this->Murl->find('first', array('conditions' => array('Murl.uri =' => $this->data['Murl']['uri'])));

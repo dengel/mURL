@@ -3,6 +3,6 @@ if($error == 0) {
     echo "http://".$app_domain."/".$code;
 }
 else {
-    echo $error;
+    echo "Error $error: $error_msg \n";
 }
 ?>
