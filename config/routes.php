@@ -45,18 +45,21 @@ Router::connect('/top/*', array('controller' => 'murls', 'action' => 'top'));
 Router::connect('/random/*', array('controller' => 'murls', 'action' => 'random'));
 Router::connect('/search/*', array('controller' => 'murls', 'action' => 'search'));
 Router::connect('/info/*', array('controller' => 'murls', 'action' => 'info'));
+#Router::connect('/info/*', array('controller' => 'murls', 'action' => 'closed'));
 Router::connect('/reverse/:code', array('controller' => 'murls', 'action' => 'reverse'),array('code'=>'[0-9a-zA-Z]+'));
 
 /* API */
 Router::connect('/api/random', array('controller' => 'apis', 'action' => 'random'));
 Router::connect('/api/last', array('controller' => 'apis', 'action' => 'last'));
 
-Router::connect('/api/create/:uri/:destruct/:private/:protect',array('controller' => 'apis', 'action' => 'create'),array('destroy'=>'(0|1)','private'=>'(0|1)'));
-Router::connect('/api/create/:uri/:destruct/:private',array('controller' => 'apis', 'action' => 'create'),array('destroy'=>'(0|1)','private'=>'(0|1)'));
-Router::connect('/api/create/:uri/:destruct',array('controller' => 'apis', 'action' => 'create'),array('destroy'=>'(0|1)'));
-Router::connect('/api/create/:uri',array('controller' => 'apis', 'action' => 'create'));
+Router::connect('/mofo/create/:uri/:destruct/:private/:protect',array('controller' => 'apis', 'action' => 'create'),array('destroy'=>'(0|1)','private'=>'(0|1)'));
+Router::connect('/mofo/create/:uri/:destruct/:private',array('controller' => 'apis', 'action' => 'create'),array('destroy'=>'(0|1)','private'=>'(0|1)'));
+Router::connect('/mofo/create/:uri/:destruct',array('controller' => 'apis', 'action' => 'create'),array('destroy'=>'(0|1)'));
+Router::connect('/mofo/create/:uri',array('controller' => 'apis', 'action' => 'create'));
 
 Router::connect('/create', array('controller' => 'murls', 'action' => 'add'));
 Router::connect('/', array('controller' => 'murls', 'action' => 'add'));
+#Router::connect('/create', array('controller' => 'murls', 'action' => 'closed'));
+#Router::connect('/', array('controller' => 'murls', 'action' => 'view'));
 Router::connect('/*', array('controller' => 'murls', 'action' => 'process'));
 ?>

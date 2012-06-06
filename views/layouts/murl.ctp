@@ -10,6 +10,7 @@
 
         echo $this->Html->css('blueprint');
         echo $this->Html->css('murl.specific');
+        echo $this->Html->css('social-buttons');
 
         echo $scripts_for_layout;
         ?>

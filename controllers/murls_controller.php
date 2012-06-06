@@ -168,6 +168,10 @@ class MurlsController extends AppController {
         $this->set('title_for_layout', "mURL Info");
     }
 
+    function closed() {
+        $this->set('title_for_layout', "mURL Closed");
+    }
+
 }
 
 ?>
